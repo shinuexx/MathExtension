@@ -405,5 +405,23 @@ namespace ShInUeXx.Numerics
                 return s;
             }
         }
+        /// <summary>
+        /// <see cref="System.Math.Floor(double)">System.Math.Floor</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/FloorFunction.html">Floor</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
+        /// </summary>
+        /// <param name="value">A <see cref="Complex"/> number</param>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Floor(double)">System.Math.Floor</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Floor(double)">System.Math.Floor</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        public static Complex Floor(Complex value) => new(System.Math.Floor(value.Real), System.Math.Floor(value.Imaginary));
+        /// <summary>
+        /// <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/CeilingFunction.html">Ceiling</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
+        /// </summary>
+        /// <param name="value">A <see cref="Complex"/> number</param>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        public static Complex Ceiling(Complex value) => new(System.Math.Ceiling(value.Real), System.Math.Ceiling(value.Imaginary));
+        /// <summary>
+        /// <see cref="System.Math.Truncate(double)">System.Math.Truncate</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/IntegerPart.html">IntegerPart</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
+        /// </summary>
+        /// <param name="value">A <see cref="Complex"/> number</param>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Truncate(double)">System.Math.Truncate</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Truncate(double)">System.Math.Truncate</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        public static Complex Truncate(Complex value) => new(System.Math.Truncate(value.Real), System.Math.Truncate(value.Imaginary));
     }
 }
