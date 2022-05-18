@@ -23,11 +23,11 @@ namespace ShInUeXx.Numerics
                 {
                     return NativeLibrary.Load("ucrtbase.dll", assembly, search_path);
                 }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
                 {
-                    return NativeLibrary.Load("libc.so.6", assembly, search_path);
+                    return NativeLibrary.Load("libm.so.6", assembly, search_path);
                 }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 {
                     return NativeLibrary.Load("libSystem.B.dylib", assembly, search_path);
                 }
