@@ -9,6 +9,19 @@ namespace ShInUeXx.Numerics
     [CLSCompliant(true)]
     public static class Math
     {
+        private static uint[] nums = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        private static string[] rum = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+        private static Dictionary<char, uint> roman_dict = new()
+        {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+            {'D', 500},
+            {'M', 1000}
+        };
+
         private const double rad_per_deg = System.Math.PI / 180;
         private const double deg_per_rad = 180 / System.Math.PI;
 
@@ -201,7 +214,6 @@ namespace ShInUeXx.Numerics
         /// <param name="x">A value</param>
         /// <returns>1 for <c><paramref name="x"/> == 0</c>; otherwise <c><see cref="Complex.Sin">Complex.Sin</see>(<paramref name="x"/>) / <paramref name="x"/></c></returns>
         public static Complex Sinc(Complex x) => x == 0d ? 1d : Complex.Sin(x) / x;
-
         /// <summary>
         /// Calculate inverse of error function.
         /// </summary>
@@ -239,7 +251,6 @@ namespace ShInUeXx.Numerics
 
             return x < 0 ? -num / den : num / den;
         }
-
         /// <summary>
         /// Indicates wheater the value is integer.
         /// </summary>
@@ -258,7 +269,6 @@ namespace ShInUeXx.Numerics
         /// <param name="x">A value</param>
         /// <returns><see langword="true"/> if <paramref name="x"/> is integer; otherwise <see langword="false"/>.</returns>
         public static bool IsInteger(decimal x) => ((x % 1m) == 0m);
-
         /// <summary>
         /// Computes an approximation of the principal <paramref name="n"/>-th root of <see cref="BigInteger"/> as the largest integer less than or equal to <c>R</c> for which <c>Pow(R, <paramref name="n"/>)</c> == <c><paramref name="base"/></c>.
         /// </summary>
@@ -285,7 +295,6 @@ namespace ShInUeXx.Numerics
             }
             return d < e ? d : e;
         }
-
         /// <summary>
         /// Returns the angle whose hyperbolic cosine is the specified <see cref="Complex"/> number.
         /// </summary>
@@ -343,7 +352,6 @@ namespace ShInUeXx.Numerics
             var abs = Complex.Abs(value);
             return abs * abs;
         }
-
         /// <summary>
         /// Returns the specified base logarithm of a specified complex number.
         /// </summary>
@@ -409,19 +417,290 @@ namespace ShInUeXx.Numerics
         /// <see cref="System.Math.Floor(double)">System.Math.Floor</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/FloorFunction.html">Floor</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
         /// </summary>
         /// <param name="value">A <see cref="Complex"/> number</param>
-        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Floor(double)">System.Math.Floor</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Floor(double)">System.Math.Floor</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Floor(double)">System.Math.Floor</see>(<paramref name="value"/>.<see cref="Complex.Real">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Floor(double)">System.Math.Floor</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
         public static Complex Floor(Complex value) => new(System.Math.Floor(value.Real), System.Math.Floor(value.Imaginary));
         /// <summary>
         /// <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/CeilingFunction.html">Ceiling</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
         /// </summary>
         /// <param name="value">A <see cref="Complex"/> number</param>
-        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see>(<paramref name="value"/>.<see cref="Complex.Real">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Ceiling(double)">System.Math.Ceiling</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
         public static Complex Ceiling(Complex value) => new(System.Math.Ceiling(value.Real), System.Math.Ceiling(value.Imaginary));
         /// <summary>
         /// <see cref="System.Math.Truncate(double)">System.Math.Truncate</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/IntegerPart.html">IntegerPart</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
         /// </summary>
         /// <param name="value">A <see cref="Complex"/> number</param>
-        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Truncate(double)">System.Math.Truncate</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Truncate(double)">System.Math.Truncate</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Truncate(double)">System.Math.Truncate</see>(<paramref name="value"/>.<see cref="Complex.Real">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Truncate(double)">System.Math.Truncate</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
         public static Complex Truncate(Complex value) => new(System.Math.Truncate(value.Real), System.Math.Truncate(value.Imaginary));
+        /// <summary>
+        /// <see cref="System.Math.Round(double)">System.Math.Truncate</see> function generalization for <see cref="Complex"/>. Implemented the same way as <see href="https://mathworld.wolfram.com/IntegerPart.html">IntegerPart</see> in the <see href="http://www.wolfram.com/language/">Wolfram Language</see>
+        /// </summary>
+        /// <param name="value">A <see cref="Complex"/> number</param>
+        /// <returns>A new <see cref="Complex"/> object where <br/><see cref="Complex.Real">Real</see> equals <see cref="System.Math.Round(double)">System.Math.Round</see>(<paramref name="value"/>.<see cref="Complex.Real">Real</see>) and <br/><see cref="Complex.Imaginary">Imaginary</see> equals <see cref="System.Math.Round(double)">System.Math.Round</see>(<paramref name="value"/>.<see cref="Complex.Imaginary">Imaginary</see>)</returns>
+        public static Complex Round(Complex value) => new(System.Math.Round(value.Real), System.Math.Round(value.Imaginary));
+        /// <summary>
+        /// Calculate factorial of number <paramref name="n"/>
+        /// </summary>
+        /// <param name="n">Number of which factorial should be calculated</param>
+        /// <returns>Value of <paramref name="n"/>! as <see cref="BigInteger">BigInteger</see></returns>
+        /// <exception cref="ArgumentOutOfRangeException">When <paramref name="n"/> is negative</exception>
+        public static BigInteger Factorial(int n)
+        {
+            if (n < 0)
+                throw new ArgumentOutOfRangeException(nameof(n), "Cannot be negative");
+            else if (n < 1)
+                return n;
+            else
+            {
+                BigInteger fact = 1;
+                for (int i = 1; i <= n; ++i)
+                    fact *= i;
+                return fact;
+            }
+        }
+        /// <summary>
+        /// Calculate number to roman numerical
+        /// </summary>
+        /// <param name="number">Number to calculate</param>
+        /// <returns>Roman number</returns>
+        [CLSCompliant(false)]
+        public static string ToRoman(uint number)
+        {
+            string value = string.Empty;
+            for(int i = 0; i < nums.Length && number != 0; ++i)
+                while(number >= nums[i])
+                {
+                    number -= nums[i];
+                    value += rum[i];
+                }
+            return value;
+        }
+        /// <summary>
+        /// Calculate Roman number to normal
+        /// </summary>
+        /// <param name="roman">Roman number</param>
+        /// <returns>uint equivalent</returns>
+        [CLSCompliant(false)]
+        public static uint ParseRoman(string roman)
+        {
+            /* Make the input string upper-case,
+             * because the dictionary doesn't support lower-case characters. */
+            roman = roman.ToUpper();
+            /* total = the current total value that will be returned.
+             * minus = value to subtract from next numeral. */
+            uint total = 0, minus = 0;
+            for(int i = 0; i < roman.Length; ++i)
+            {
+                // Get the value for the current numeral. Takes subtraction into account.
+                uint this_numeral = roman_dict[roman[i]] - minus;
+                /* Checks if this is the last character in the string, or if the current numeral
+                 * is greater than or equal to the next numeral. If so, we will reset our minus
+                 * variable and add the current numeral to the total value. Otherwise, we will
+                 * subtract the current numeral from the next numeral, and continue. */
+                if (i >= roman.Length - 1 || this_numeral + minus >= roman_dict[roman[i + 1]])
+                {
+                    total += this_numeral;
+                    minus = 0;
+                }
+                else
+                {
+                    minus = this_numeral;
+                }
+            }
+            return total;
+        }
+        /// <summary>
+        /// Calculate inverse square root of <paramref name="x"/>
+        /// </summary>
+        /// <param name="x">Non-negative integer</param>
+        /// <returns>Integer square root of <paramref name="x"/></returns>
+        public static BigInteger InverseSqrt(BigInteger x)
+        {
+            BigInteger q = 1, r = 0, t;
+            while (q <= x)
+                q <<= 2;
+            while (q > 1)
+            {
+                q >>= 2;
+                t = x - r - q;
+                r >>= 1;
+                if (t >= 0)
+                {
+                    x = t;
+                    r += q;
+                }
+            }
+            return r;
+        }
+        /// <summary>
+        /// Computes Jacobi symbol of <paramref name="n"/> and <paramref name="k"/>. <paramref name="k"/> should be odd and must be positive
+        /// </summary>
+        /// <param name="n">Value of n</param>
+        /// <param name="k">Value of k. Should be odd and must be positive.</param>
+        /// <returns>Jacobi symbol</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static BigInteger Jacobi(BigInteger n, BigInteger k)
+        {
+            if (k < 0 || ((k & 1) == 1)) throw new ArgumentException(null, nameof(k));
+            n %= k;
+            BigInteger t = 1;
+            while(!n.IsZero)
+            {
+                while((n & 1) == 0)
+                {
+                    n /= 2;
+                    var r = k % 8;
+                    if (r == 3 || r == 5)
+                        t = -t;
+                }
+                (k, n) = (n, k);
+                if ((n & 4) == 3 && ((k & 3) == 3))
+                    t = -t;
+                n %= k;
+            }
+            return k.IsOne ? t : BigInteger.Zero;
+        }
+        /// <summary>
+        /// Computes Jacobi symbol of <paramref name="n"/> and <paramref name="k"/>. <paramref name="k"/> should be odd and must be positive
+        /// </summary>
+        /// <param name="n">Value of n</param>
+        /// <param name="k">Value of k. Should be odd and must be positive.</param>
+        /// <returns>Jacobi symbol</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static long Jacobi(long n, long k)
+        {
+            if (k < 0 || ((k & 1) == 1)) throw new ArgumentException(null, nameof(k));
+            n %= k;
+            long t = 1;
+            while (n != 0)
+            {
+                while ((n & 1) == 0)
+                {
+                    n /= 2;
+                    var r = k % 8;
+                    if (r == 3 || r == 5)
+                        t = -t;
+                }
+                (k, n) = (n, k);
+                if ((n & 4) == 3 && ((k & 3) == 3))
+                    t = -t;
+                n %= k;
+            }
+            return k == 1 ? t : 0;
+        }
+        /// <summary>
+        /// Calculate divisors of given number <paramref name="dividend"/>
+        /// </summary>
+        /// <param name="dividend"></param>
+        /// <returns>Dictionary of number divisors with quantity</returns>
+        public static Dictionary<int, int> PrimeDivisors(int dividend)
+        {
+            Dictionary<int, int> result = new();
+            if (dividend < 0) dividend = -dividend;
+
+            if (dividend != 0)
+            {
+                while(dividend != 1)
+                {
+                    for(int i = 2; i < dividend; ++i)
+                    {
+                        if((dividend % i) == 0)
+                        {
+                            result[i] = result.ContainsKey(i) ? result[i] + 1 : 1;
+                            dividend /= i;
+                            break;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        /// <summary>
+        /// Calculate divisors of given number <paramref name="dividend"/>
+        /// </summary>
+        /// <param name="dividend"></param>
+        /// <returns>Dictionary of number divisors with quantity</returns>
+        public static Dictionary<BigInteger, int> PrimeDivisors(BigInteger dividend)
+        {
+            Dictionary<BigInteger, int> result = new();
+            if (dividend < 0) dividend = -dividend;
+
+            if (dividend != 0)
+            {
+                while (dividend != 1)
+                {
+                    for (int i = 2; i < dividend; ++i)
+                    {
+                        if ((dividend % i) == 0)
+                        {
+                            result[i] = result.ContainsKey(i) ? result[i] + 1 : 1;
+                            dividend /= i;
+                            break;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        /// <summary>
+        /// Finds the greatest common divisor of two <see cref="int"/> values.
+        /// </summary>
+        /// <param name="a">The first value</param>
+        /// <param name="b">The second value</param>
+        /// <returns>The greatest common division of <paramref name="a"/> and <paramref name="b"/></returns>
+        public static int GreatestCommonDivisor(int a, int b)
+        {
+            while (b != 0) b = a % (a = b);
+            return a;
+        }
+        /// <summary>
+        /// Finds the greatest common divisor of two <see cref="long"/> values.
+        /// </summary>
+        /// <param name="a">The first value</param>
+        /// <param name="b">The second value</param>
+        /// <returns>The greatest common division of <paramref name="a"/> and <paramref name="b"/></returns>
+        public static long GreatestCommonDivisor(long a, long b)
+        {
+            while (b != 0) b = a % (a = b);
+            return a;
+        }
+        /// <summary>
+        /// The Minkowski question-mark function converts the continued fraction representation [a0; a1, a2, a3, ...] of a number into a binary decimal representation in which the integer part a0 is unchanged and the a1, a2, ... become alternating runs of binary zeroes and ones of those lengths. The decimal point takes the place of the first zero.
+        /// </summary>
+        /// <param name="x">Value to converts</param>
+        /// <returns>Converted value</returns>
+        public static double Minkowski(double x)
+        {
+            long p = (long)x;
+            if (p > x) --p;
+            long q = 1, r = p + 1, s = 1, m, n;
+            double d = 1, y = p;
+            if (x < p || (p < 0) ^ (r <= 0))
+                return x;
+            for(; ; )/* invariants: q * r - p * s == 1 && (double)p / q <= x && x < (double)r / s */
+            {
+                d /= 2;
+                if (y + d == y)
+                    break; /* reached max possible precision */
+                m = p + r;
+                if ((m < 0) ^ (p < 0))
+                    break; /* sum overflowed */
+                n = q + s;
+                if (n < 0)
+                    break; /* sum overflowed */
+
+                if (x < (double)m / n)
+                {
+                    r = m;
+                    s = n;
+                }
+                else
+                {
+                    y += d;
+                    p = m;
+                    q = n;
+                }
+            }
+            return y + d; /* final round-off */
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace MathExtensionTests
             Assert.IsTrue(Math.IsInteger(integer3));
 
             var non_integer1 = System.Math.PI;
-            var non_integer2 = System.MathF.PI;
+            var non_integer2 = MathF.PI;
             var non_integer3 = 1.001m;
 
             Assert.IsFalse(Math.IsInteger(non_integer1));
